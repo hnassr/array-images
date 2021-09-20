@@ -1,9 +1,29 @@
-# Laravel Nova Field - Array Images
+# Laravel Nova Field - Array Images with resize
 A laravel nova field that will let you save your uploaded images path to your database in array format.
 
+### This package is using this package to resize the images https://github.com/Intervention/image
+
 # Installation
+add package to your composer.json
 ```
-composer require halimtuhu/array-images
+"require": {
+        ...
+        "halimtuhu/array-images": "v1.2",
+        ...
+    },
+```
+and this repo as repository in same file
+```
+"repositories": [
+        {
+            "type": "path",
+            "url": "./nova"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/hnassr/array-images"
+        }
+    ]
 ```
 
 # Usage
@@ -16,7 +36,7 @@ public function fields(Request $request)
     {
         return [
             ...
-            ArrayImages::make('Images', 'images'),
+            ArrayImages::make('Images', 'images')->resize(800, null, true), // width, height, aspectRatio
             ...
         ];
     }
